@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6A9E6A98-9DB8-4B76-84DE-0431E1646AC3}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>CCModPackGenerator</RootNamespace>
+    <AssemblyName>CCModPackGenerator</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="INIGenerator.cs" />
+    <Compile Include="ItemBuilder.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ItemBuilder.Designer.cs">
+      <DependentUpon>ItemBuilder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CostumeBuilder.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CostumeBuilder.Designer.cs">
+      <DependentUpon>CostumeBuilder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MeshBuilder.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MeshBuilder.Designer.cs">
+      <DependentUpon>MeshBuilder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModPackGui.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModPackGui.Designer.cs">
+      <DependentUpon>ModPackGui.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceBuilder.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ResourceBuilder.Designer.cs">
+      <DependentUpon>ResourceBuilder.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="ItemBuilder.resx">
+      <DependentUpon>ItemBuilder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CostumeBuilder.resx">
+      <DependentUpon>CostumeBuilder.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MeshBuilder.resx">
+      <DependentUpon>MeshBuilder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModPackGui.resx">
+      <DependentUpon>ModPackGui.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="ResourceBuilder.resx">
+      <DependentUpon>ResourceBuilder.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CCModConfig\CCModConfig.csproj">
+      <Project>{ea26eb4e-349d-4895-88b2-ccd3216cb0b2}</Project>
+      <Name>CCModConfig</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
