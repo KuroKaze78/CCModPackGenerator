@@ -61,7 +61,7 @@ namespace CCModPackGenerator
             legVBList = new BindingList<string>();
             textureList = new BindingList<string>();
             formatList = new BindingList<string>();
-            
+            formatList.Add("DXGI_FORMAT_R16_UINT");
         }
 
         public static void ResetLists()
@@ -102,6 +102,7 @@ namespace CCModPackGenerator
             textureList.Add("");
             formatList.Clear();
             formatList.Add("");
+            formatList.Add("DXGI_FORMAT_R16_UINT");
 
             foreach (CharacterProject charProject in ModConfig.CharacterMods)
             {

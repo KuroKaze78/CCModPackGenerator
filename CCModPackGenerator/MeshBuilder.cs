@@ -18,6 +18,9 @@ namespace CCModPackGenerator
         public EventHandler<MeshSlotParameterEventArgs> MeshSlotUpdated { get; set; }
         public MeshSlotType meshSlotType { get; set; }
 
+        public String normalFormatValue;
+        public String shadowFormatValue;
+
         public class MeshSlotParameterEventArgs : EventArgs
         {
             public MeshSlotParameter meshSlotParam;
@@ -64,12 +67,14 @@ namespace CCModPackGenerator
             this.ps0Resource.ResourceUpdated = MeshSlotFilenameUpdated;
             this.ps1Resource.ResourceUpdated = MeshSlotFilenameUpdated;
             this.ps2Resource.ResourceUpdated = MeshSlotFilenameUpdated;
+            normalFormatValue = "";
+            shadowFormatValue = "";
         }
 
         public void SetMeshSlot(MeshSlot meshSlot)
         {
             this.ibResource.SetValue(meshSlot.NormalMesh.IndexBuffer);
-            this.normalFormat.Text = meshSlot.NormalMesh.Format;
+            SetNormalFormatText(meshSlot.NormalMesh.Format);
             this.vbResource.SetValue(meshSlot.NormalMesh.VertexBuffer);
             this.normalStride.Text = meshSlot.NormalMesh.Stride.ToString();
 
@@ -85,7 +90,7 @@ namespace CCModPackGenerator
             {
                 this.customShadows.Checked = true;
                 this.sibResource.SetValue(meshSlot.ShadowMesh.IndexBuffer);
-                this.shadowFormat.Text = meshSlot.ShadowMesh.Format;
+                SetShadowFormatText(meshSlot.ShadowMesh.Format);
                 this.svbResource.SetValue(meshSlot.ShadowMesh.VertexBuffer);
                 this.ShadowStride.Text = meshSlot.ShadowMesh.Stride.ToString();
             }
@@ -94,6 +99,13 @@ namespace CCModPackGenerator
             this.ps1Resource.SetValue(meshSlot.PS1Texture);
             this.ps2Resource.SetValue(meshSlot.PS2Texture);
 
+            BindingSource bNFSource = new BindingSource();
+            bNFSource.DataSource = ModPackGui.formatList;
+            bNFSource.ListChanged += BNFSource_NormalListChanged;
+
+            BindingSource bSFSource = new BindingSource();
+            bSFSource.DataSource = ModPackGui.formatList;
+            bSFSource.ListChanged += BNFSource_ShadowListChanged;
 
             this.vbResource.SetBindingList(ref ModPackGui.vbList);
             this.svbResource.SetBindingList(ref ModPackGui.vbList);
@@ -104,6 +116,26 @@ namespace CCModPackGenerator
             this.ps0Resource.SetBindingList(ref ModPackGui.textureList);
             this.ps1Resource.SetBindingList(ref ModPackGui.textureList);
             this.ps2Resource.SetBindingList(ref ModPackGui.textureList);
+        }
+
+        public void SetNormalFormatText(String value)
+        {
+            normalFormatValue = value;
+            this.normalFormat.Text = value;
+        }
+        private void BNFSource_NormalListChanged(object sender, ListChangedEventArgs e)
+        {
+            this.normalFormat.Text = normalFormatValue;
+        }
+
+        public void SetShadowFormatText(String value)
+        {
+            shadowFormatValue = value;
+            this.shadowFormat.Text = value;
+        }
+        private void BNFSource_ShadowListChanged(object sender, ListChangedEventArgs e)
+        {
+            this.shadowFormat.Text = shadowFormatValue;
         }
 
         public void SetMeshSlotTitle(String meshSlotTitle)
@@ -164,12 +196,20 @@ namespace CCModPackGenerator
                 updatedParam = MeshSlotParameter.PS2;
                 ModPackGui.CacheString(e.value, ref ModPackGui.textureList);
             }
+            if (sender is ResourceBuilder)
+            {
+                (sender as ResourceBuilder).SetValue(e.value);
+            }
 
             MeshSlotUpdated?.Invoke(this, new MeshSlotParameterEventArgs(updatedParam, e.value));
+            
         }
 
         private void MeshSlotIBFormatUpdated(object sender, EventArgs e)
         {
+            normalFormatValue = this.normalFormat.Text;
+            ModPackGui.CacheString(normalFormatValue, ref ModPackGui.formatList);
+
             MeshSlotUpdated?.Invoke(this, new MeshSlotParameterEventArgs(MeshSlotParameter.IB_FORMAT, this.normalFormat.Text));
         }
 
@@ -180,6 +220,9 @@ namespace CCModPackGenerator
 
         private void MeshSlotSIBFormatUpdated(object sender, EventArgs e)
         {
+            shadowFormatValue = this.shadowFormat.Text;
+            ModPackGui.CacheString(shadowFormatValue, ref ModPackGui.formatList);
+
             MeshSlotUpdated?.Invoke(this, new MeshSlotParameterEventArgs(MeshSlotParameter.SIB_FORMAT, this.shadowFormat.Text));
         }
 

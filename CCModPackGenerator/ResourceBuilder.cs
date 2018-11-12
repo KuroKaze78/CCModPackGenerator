@@ -12,6 +12,7 @@ namespace CCModPackGenerator
 {
     public partial class ResourceBuilder : UserControl
     {
+        String currentValue;
         public String FileFilter { get; set; }
         public EventHandler<StringEventArgs> ResourceUpdated { get; set; }
 
@@ -28,25 +29,35 @@ namespace CCModPackGenerator
         public ResourceBuilder()
         {
             InitializeComponent();
+            currentValue = "";
         }
 
         public void Clear()
         {
             filenameBox.Text = "";
+            currentValue = "";
         }
 
         public void SetBindingList(ref BindingList<String> bindingList)
         {
             BindingSource bSource = new BindingSource();
             bSource.DataSource = bindingList;
+            bSource.ListChanged += BSource_ListChanged;
             String currentValue = this.filenameBox.Text;
             ModPackGui.CacheString(currentValue, ref bindingList);
             this.filenameBox.DataSource = bSource;
             this.filenameBox.SelectedItem = currentValue;
         }
 
+        private void BSource_ListChanged(object sender, ListChangedEventArgs e)
+        {
+            // Switch the box back to the last value;
+            filenameBox.Text = currentValue;
+        }
+
         public void SetValue(String value)
         {
+            currentValue = value;
             filenameBox.Text = value;
         }
 
@@ -84,7 +95,7 @@ namespace CCModPackGenerator
                 }
 
                 ResourceUpdated?.Invoke(this, new StringEventArgs(filepath));
-                filenameBox.Text = filepath;
+                SetValue(filepath);
             }
         }
     }

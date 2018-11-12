@@ -62,7 +62,7 @@ namespace CCModPackGenerator
             categoryDefaults[Category.Bra] = new CategoryMetadata("2", "../shared/Bra_Icon.png", "", "Bra");
             categoryDefaults[Category.Panty] = new CategoryMetadata("3", "../shared/Panty_Icon.png", "", "Panty");
             categoryDefaults[Category.Skirt] = new CategoryMetadata("4", "../shared/Skirt_Icon.png", "", "Skirt");
-            categoryDefaults[Category.Gloves] = new CategoryMetadata("5", "../shared/Glove_Icon.png", "", "Gloves");
+            categoryDefaults[Category.Gloves] = new CategoryMetadata("5", "../shared/Glove_Icon.png", "", "Glove");
             categoryDefaults[Category.Shoes] = new CategoryMetadata("6", "../shared/Shoe_Icon.png", "", "Shoes");
             categoryDefaults[Category.Accessory1] = new CategoryMetadata("7", "../shared/Accessory_1_Icon.png", "", "Accessory1");
             categoryDefaults[Category.Accessory2] = new CategoryMetadata("8", "../shared/Accessory_2_Icon.png", "", "Accessory2");
