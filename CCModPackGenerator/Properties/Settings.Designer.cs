@@ -8,22 +8,61 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CCModPackGenerator.Properties
-{
-
-
+namespace CCModPackGenerator.Properties {
+    
+    
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
-    {
-
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.8.0.0")]
+    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+        
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
-
-        public static Settings Default
-        {
-            get
-            {
+        
+        public static Settings Default {
+            get {
                 return defaultInstance;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>KasumiMisaki</string>
+  <string>Ayane</string>
+  <string>Hitomi</string>
+  <string>Kokoro</string>
+  <string>Helena</string>
+  <string>Momiji</string>
+  <string>NyoTengu</string>
+  <string>Tamaki</string>
+  <string>LeiFang</string>
+  <string>Fiona</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection CommonSkins {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["CommonSkins"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>Honoka</string>\r\n  <string>Luna</string>\r\n</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection HonokaSkins {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["HonokaSkins"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<ArrayOfString xmlns:xsi=\"http://www.w3." +
+            "org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n  <s" +
+            "tring>MarieRose</string>\r\n  <string>Nagisa</string>\r\n</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection MarieSkins {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["MarieSkins"]));
             }
         }
     }

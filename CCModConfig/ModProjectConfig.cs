@@ -276,6 +276,12 @@ namespace CCModConfig
     {
         public BodyMeshType MeshType { get; set; }
 
+        [XmlElement("SkinTexture")]
+        public List<SkinTexture> SkinTextures { get; set; }
+
+        [XmlElement("TanTexture")]
+        public String TanTexture { get; set; }
+
         public BodyMesh() : base()
         {
         }
@@ -302,6 +308,15 @@ namespace CCModConfig
 
             return cloneBodyMesh;
         }
+    }
+
+    public class SkinTexture
+    {
+        [XmlAttribute("SkinSlot")]
+        public String SkinSlot { get; set; }
+
+        [XmlAttribute("Filename")]
+        public String Filename { get; set; }
     }
 
     public class Mesh

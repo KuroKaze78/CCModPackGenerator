@@ -42,6 +42,10 @@ namespace CCModPackGenerator
 
         private const String vbSuffix = "_VB";
         private const String ibSuffix = "_IB";
+
+        private const String tanSuffix = "_TAN";
+        private const String skinSuffix = "_SKIN";
+
         private const String ps0Suffix = "_PS0";
         private const String ps1Suffix = "_PS1";
         private const String ps2Suffix = "_PS2";
@@ -230,6 +234,19 @@ namespace CCModPackGenerator
                         {
                             CacheIBResource(bodyMesh.IndexBuffer, bodyMesh.Format, option.Name + bodyMeshTypeResName[bodyMesh.MeshType] + ibSuffix);
                             CacheVBResource(bodyMesh.VertexBuffer, bodyMesh.Stride, option.Name + bodyMeshTypeResName[bodyMesh.MeshType] + vbSuffix);
+                            
+                            if (!String.IsNullOrEmpty(bodyMesh.TanTexture))
+                            {
+                                CacheTextureResource(bodyMesh.TanTexture, option.Name + bodyMeshTypeResName[bodyMesh.MeshType] + tanSuffix);
+                            }
+
+                            foreach (SkinTexture aSkinTexture in bodyMesh.SkinTextures)
+                            {
+                                if (!String.IsNullOrEmpty(aSkinTexture.Filename))
+                                {
+                                    CacheTextureResource(aSkinTexture.Filename, option.Name + bodyMeshTypeResName[bodyMesh.MeshType] + aSkinTexture.SkinSlot + skinSuffix);
+                                }
+                            }
                         }
                     }
                 }
@@ -253,115 +270,105 @@ namespace CCModPackGenerator
 
 ; Check options based on available
 [CommandListSelect]
-if x7 == 0
+if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentCategory == 0
   run = CommandListSelect0
 endif
-if x7 == 1
+if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentCategory == 1
   run = CommandListSelect1
 endif
-if x7 == 2
+if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentCategory == 2
   run = CommandListSelect2
 endif
-if x7 == 3
+if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentCategory == 3
   run = CommandListSelect3
 endif
-if x7 == 4
+if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentCategory == 4
   run = CommandListSelect4
 endif
-if x7 == 5
+if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentCategory == 5
   run = CommandListSelect5
 endif
-if x7 == 6
+if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentCategory == 6
   run = CommandListSelect6
 endif
-if x7 == 7
+if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentCategory == 7
   run = CommandListSelect7
 endif
-if x7 == 8
+if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentCategory == 8
   run = CommandListSelect8
 endif
-if x7 == 9
+if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentCategory == 9
   run = CommandListSelect9
 endif
-if x7 == 10
+if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentCategory == 10
   run = CommandListSelect10
 endif
 
 ");
 
-                sb.AppendLine("[CommandListSelect0]");
-                sb.AppendLine("if y7 == 12");
-                sb.AppendLine("  ; Option 12");
+                sb.AppendLine(@"[CommandListSelect0]");
+                sb.AppendLine(@"if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentOption == 12");
+                sb.AppendLine(@"  ; Option 12");
 
                 // Set Preset 12
                 AppendPreset(charaProj, 12, sb);
 
-                sb.AppendLine("else");
-                sb.AppendLine("if y7 == 11");
-                sb.AppendLine("  ; Option 11");
+                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentOption == 11");
+                sb.AppendLine(@"  ; Option 11");
 
                 // Set Preset 11
                 AppendPreset(charaProj, 11, sb);
 
-                sb.AppendLine("else");
-                sb.AppendLine("if y7 == 10");
-                sb.AppendLine("  ; Option 10");
+                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentOption == 10");
+                sb.AppendLine(@"  ; Option 10");
 
                 // Set Preset 10
                 AppendPreset(charaProj, 10, sb);
 
-                sb.AppendLine("else");
-                sb.AppendLine("if y7 == 9");
-                sb.AppendLine("  ; Option 9");
+                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentOption == 9");
+                sb.AppendLine(@"  ; Option 9");
 
                 // Set Preset 9
                 AppendPreset(charaProj, 9, sb);
 
-                sb.AppendLine("else");
-                sb.AppendLine("if y7 == 8");
-                sb.AppendLine("  ; Option 8");
+                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentOption == 8");
+                sb.AppendLine(@"  ; Option 8");
 
                 // Set Preset 8
                 AppendPreset(charaProj, 8, sb);
 
-                sb.AppendLine("else");
-                sb.AppendLine("if y7 == 7");
-                sb.AppendLine("  ; Option 7");
+                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentOption == 7");
+                sb.AppendLine(@"  ; Option 7");
 
                 // Set Preset 7
                 AppendPreset(charaProj, 7, sb);
 
-                sb.AppendLine("else");
-                sb.AppendLine("if y7 == 6");
-                sb.AppendLine("  ; Option 6");
+                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentOption == 6");
+                sb.AppendLine(@"  ; Option 6");
 
                 // Set Preset 6
                 AppendPreset(charaProj, 6, sb);
 
-                sb.AppendLine("else");
-                sb.AppendLine("if y7 == 5");
-                sb.AppendLine("  ; Option 5");
+                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentOption == 5");
+                sb.AppendLine(@"  ; Option 5");
 
                 // Set Preset 5
-                AppendPreset(charaProj, 4, sb);
+                AppendPreset(charaProj, 5, sb);
 
-                sb.AppendLine("else");
-                sb.AppendLine("if y7 == 4");
-                sb.AppendLine("  ; Option 4");
+                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentOption == 4");
+                sb.AppendLine(@"  ; Option 4");
 
                 // Set Preset 4
                 AppendPreset(charaProj, 4, sb);
 
-                sb.AppendLine("else");
-                sb.AppendLine("if y7 == 3");
-                sb.AppendLine("  ; Option 3");
+                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentOption == 3");
+                sb.AppendLine(@"  ; Option 3");
 
                 // Set Preset 3
                 AppendPreset(charaProj, 3, sb);
 
-                sb.AppendLine("else");
-                sb.AppendLine("if y7 == 2");
-                sb.AppendLine("  ; Option 2");
+                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentOption == 2");
+                sb.AppendLine(@"  ; Option 2");
 
                 // Set Preset 2
                 AppendPreset(charaProj, 2, sb);
@@ -373,16 +380,6 @@ endif
                 AppendPreset(charaProj, 1, sb);
 
                 sb.AppendLine(@"
-endif
-endif
-endif
-endif
-endif
-endif
-endif
-endif
-endif
-endif
 endif");
                 // Select Items
                 foreach (Item item in charaProj.Items)
@@ -410,8 +407,8 @@ endif");
                 sb.AppendLine("; Preset " + slot + " - " + curPreset.Name);
                 foreach (PresetOption curPresetOption in curPreset.PresetOptions)
                 {
-                    sb.AppendLine("  y7 = " + curPresetOption.Option);
-                    sb.AppendLine("  run = CommandListSelect" + categoryDefaults[curPresetOption.PresetItem].slot);
+                    sb.AppendLine(@"  $\Mods\Costumes\CostumeCustomizer\Common.ini\currentOption = " + curPresetOption.Option);
+                    sb.AppendLine(@"  run = CommandListSelect" + categoryDefaults[curPresetOption.PresetItem].slot);
                 }
             }
         }
@@ -424,8 +421,8 @@ endif");
             for (int i = 1; i <= item.Options.Count; i++)
             {
                 Option currentOption = item.Options[i-1];
-                sb.AppendLine("if y7 == " + i);
-                sb.AppendLine("  ; Option " + i + " - " + currentOption.Name);
+                sb.AppendLine(@"if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentOption == " + i);
+                sb.AppendLine(@"  ; Option " + i + " - " + currentOption.Name);
                 
                 foreach (BodyMesh bodyMesh in currentOption.BodyMeshes)
                 {
@@ -446,6 +443,19 @@ endif");
                             if (FilenameToResource.ContainsKey(bodyMesh.VertexBuffer))
                             {
                                 sb.AppendLine(@"  Resource\" + resourceHeader + @"\" + bodyMeshTypeResName[bodyMesh.MeshType] + "VB = ref " + FilenameToResource[bodyMesh.VertexBuffer]);
+                            }
+
+                            if (!String.IsNullOrEmpty(bodyMesh.TanTexture) && FilenameToResource.ContainsKey(bodyMesh.TanTexture))
+                            {
+                                sb.AppendLine(@"  Resource\" + resourceHeader + @"\" + bodyMeshTypeResName[bodyMesh.MeshType] + "PS3 = " + FilenameToResource[bodyMesh.TanTexture]);
+                            }
+
+                            foreach (SkinTexture aSkinTexture in bodyMesh.SkinTextures)
+                            {
+                                if (!String.IsNullOrEmpty(aSkinTexture.Filename) && FilenameToResource.ContainsKey(aSkinTexture.Filename))
+                                {
+                                    sb.AppendLine(@"  Resource\" + resourceHeader + @"\" + aSkinTexture.SkinSlot + bodyMeshTypeResName[bodyMesh.MeshType] + "PS0 = " + FilenameToResource[aSkinTexture.Filename]);
+                                }
                             }
                         }
                     }

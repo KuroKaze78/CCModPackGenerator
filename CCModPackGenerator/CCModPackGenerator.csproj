@@ -76,6 +76,12 @@
     <Compile Include="ResourceBuilder.Designer.cs">
       <DependentUpon>ResourceBuilder.cs</DependentUpon>
     </Compile>
+    <Compile Include="SkinCustomizer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SkinCustomizer.Designer.cs">
+      <DependentUpon>SkinCustomizer.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="ItemBuilder.resx">
       <DependentUpon>ItemBuilder.cs</DependentUpon>
     </EmbeddedResource>
@@ -101,6 +107,10 @@
     <EmbeddedResource Include="ResourceBuilder.resx">
       <DependentUpon>ResourceBuilder.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SkinCustomizer.resx">
+      <DependentUpon>SkinCustomizer.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

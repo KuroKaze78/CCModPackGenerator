@@ -76,6 +76,8 @@
             this.previewGraphic = new System.Windows.Forms.PictureBox();
             this.iconGraphic = new System.Windows.Forms.PictureBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.bodySkinButton = new System.Windows.Forms.Button();
+            this.nailSkinButton = new System.Windows.Forms.Button();
             this.itemPresetSplits.Panel1.SuspendLayout();
             this.itemPresetSplits.Panel2.SuspendLayout();
             this.itemPresetSplits.SuspendLayout();
@@ -233,6 +235,7 @@
             // 
             // bodyGroup
             // 
+            this.bodyGroup.Controls.Add(this.bodySkinButton);
             this.bodyGroup.Controls.Add(this.labelBody);
             this.bodyGroup.Controls.Add(this.radioButtonBodyCustom);
             this.bodyGroup.Controls.Add(this.radioButtonBodyOff);
@@ -384,6 +387,7 @@
             // 
             // nailGroup
             // 
+            this.nailGroup.Controls.Add(this.nailSkinButton);
             this.nailGroup.Controls.Add(this.comboNailFormat);
             this.nailGroup.Controls.Add(this.textBoxNailStride);
             this.nailGroup.Controls.Add(this.label5);
@@ -663,6 +667,30 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // bodySkinButton
+            // 
+            this.bodySkinButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.bodySkinButton.Enabled = false;
+            this.bodySkinButton.Location = new System.Drawing.Point(287, 10);
+            this.bodySkinButton.Name = "bodySkinButton";
+            this.bodySkinButton.Size = new System.Drawing.Size(128, 23);
+            this.bodySkinButton.TabIndex = 36;
+            this.bodySkinButton.Text = "Customize Skin";
+            this.bodySkinButton.UseVisualStyleBackColor = true;
+            this.bodySkinButton.Click += new System.EventHandler(this.bodySkinButton_Click);
+            // 
+            // nailSkinButton
+            // 
+            this.nailSkinButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.nailSkinButton.Enabled = false;
+            this.nailSkinButton.Location = new System.Drawing.Point(287, 13);
+            this.nailSkinButton.Name = "nailSkinButton";
+            this.nailSkinButton.Size = new System.Drawing.Size(128, 23);
+            this.nailSkinButton.TabIndex = 36;
+            this.nailSkinButton.Text = "Customize Skin";
+            this.nailSkinButton.UseVisualStyleBackColor = true;
+            this.nailSkinButton.Click += new System.EventHandler(this.nailSkinButton_Click);
+            // 
             // ItemBuilder
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -741,5 +769,7 @@
         private System.Windows.Forms.RadioButton radioButtonBodyDefault;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button bodySkinButton;
+        private System.Windows.Forms.Button nailSkinButton;
     }
 }

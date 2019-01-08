@@ -142,16 +142,16 @@ namespace CCModPackGenerator
                 }
             }
 
-            this.itemBuilderChest.SetConfig(chestItem);
-            this.itemBuilderBra.SetConfig(braItem);
-            this.itemBuilderPanties.SetConfig(pantyItem);
-            this.itemBuilderSkirt.SetConfig(skirtItem);
-            this.itemBuilderGloves.SetConfig(glovesItem);
-            this.itemBuilderShoes.SetConfig(shoesItem);
-            this.itemBuilderAcc1.SetConfig(acc1Item);
-            this.itemBuilderAcc2.SetConfig(acc2Item);
-            this.itemBuilderAcc3.SetConfig(acc3Item);
-            this.itemBuilderAcc4.SetConfig(acc4Item);
+            this.itemBuilderChest.SetConfig(chestItem, characterConfig.Model);
+            this.itemBuilderBra.SetConfig(braItem, characterConfig.Model);
+            this.itemBuilderPanties.SetConfig(pantyItem, characterConfig.Model);
+            this.itemBuilderSkirt.SetConfig(skirtItem, characterConfig.Model);
+            this.itemBuilderGloves.SetConfig(glovesItem, characterConfig.Model);
+            this.itemBuilderShoes.SetConfig(shoesItem, characterConfig.Model);
+            this.itemBuilderAcc1.SetConfig(acc1Item, characterConfig.Model);
+            this.itemBuilderAcc2.SetConfig(acc2Item, characterConfig.Model);
+            this.itemBuilderAcc3.SetConfig(acc3Item, characterConfig.Model);
+            this.itemBuilderAcc4.SetConfig(acc4Item, characterConfig.Model);
 
             Presets.Clear();
             foreach (Preset aPreset in characterConfig.Presets)

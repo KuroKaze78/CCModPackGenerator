@@ -19,6 +19,8 @@ namespace CCModPackGenerator
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public BindingList<Option> OptionList { get; set; }
 
+        private ModelType currentModelType { get; set; }
+
         public ItemBuilder()
         {
             InitializeComponent();
@@ -40,9 +42,10 @@ namespace CCModPackGenerator
             this.optionsBox.DataSource = bSource;
         }
 
-        public void SetConfig(CCModConfig.Item modItem)
+        public void SetConfig(CCModConfig.Item modItem, ModelType modelType)
         {
             ModItem = modItem;
+            currentModelType = modelType;
 
             BindingSource bodyFormatSource = new BindingSource();
             bodyFormatSource.DataSource = ModPackGui.formatList;
@@ -275,6 +278,7 @@ namespace CCModPackGenerator
                         this.resourceNailVB.Enabled = true;
                         this.textBoxNailStride.Enabled = true;
                         this.comboNailFormat.Enabled = true;
+                        this.nailSkinButton.Enabled = true;
 
                         this.resourceNailIB.SetValue(extraBodyMesh.IndexBuffer);
                         this.resourceNailVB.SetValue(extraBodyMesh.VertexBuffer);
@@ -299,6 +303,7 @@ namespace CCModPackGenerator
                         this.resourceNailVB.Enabled = false;
                         this.textBoxNailStride.Enabled = false;
                         this.comboNailFormat.Enabled = false;
+                        this.nailSkinButton.Enabled = false;
                     }
                 }
                 else
@@ -326,6 +331,7 @@ namespace CCModPackGenerator
                         this.resourceSkinVB.Enabled = true;
                         this.textBoxBodyStride.Enabled = true;
                         this.comboBoxBodyFormat.Enabled = true;
+                        this.bodySkinButton.Enabled = true;
 
                         this.resourceSkinIB.SetValue(skinBodyMesh.IndexBuffer);
                         this.resourceSkinVB.SetValue(skinBodyMesh.VertexBuffer);
@@ -350,6 +356,7 @@ namespace CCModPackGenerator
                         this.resourceSkinVB.Enabled = false;
                         this.textBoxBodyStride.Enabled = false;
                         this.comboBoxBodyFormat.Enabled = false;
+                        this.bodySkinButton.Enabled = false;
                     }
                 }
                 else
@@ -1057,6 +1064,59 @@ namespace CCModPackGenerator
                             }
                             break;
                     }
+                }
+            }
+        }
+
+        private void bodySkinButton_Click(object sender, EventArgs e)
+        {
+            Option selectedOption = this.optionsBox.SelectedItem as Option;
+            foreach (BodyMesh bMesh in selectedOption.BodyMeshes)
+            {
+                switch (bMesh.MeshType)
+                {
+                    case BodyMeshType.Breast:
+                    case BodyMeshType.Groin:
+                    case BodyMeshType.Arm:
+                    case BodyMeshType.Leg:
+                        SkinCustomizer skinCustomizer = new SkinCustomizer(bMesh, currentModelType);
+                        skinCustomizer.ShowDialog();
+                        bMesh.TanTexture = skinCustomizer.TanTexture;
+                        bMesh.SkinTextures.Clear();
+                        foreach (KeyValuePair<String, String> textureSlots in skinCustomizer.SkinTextures)
+                        {
+                            SkinTexture newSkinTexture = new SkinTexture();
+                            newSkinTexture.SkinSlot = textureSlots.Key;
+                            newSkinTexture.Filename = textureSlots.Value;
+                            bMesh.SkinTextures.Add(newSkinTexture);
+                        }
+                        break;
+                }
+            }
+        }
+
+        private void nailSkinButton_Click(object sender, EventArgs e)
+        {
+            Option selectedOption = this.optionsBox.SelectedItem as Option;
+            foreach (BodyMesh bMesh in selectedOption.BodyMeshes)
+            {
+                switch (bMesh.MeshType)
+                {
+                    case BodyMeshType.Torso:
+                    case BodyMeshType.FingerNail:
+                    case BodyMeshType.ToeNail:
+                        SkinCustomizer skinCustomizer = new SkinCustomizer(bMesh, currentModelType);
+                        skinCustomizer.ShowDialog();
+                        bMesh.TanTexture = skinCustomizer.TanTexture;
+                        bMesh.SkinTextures.Clear();
+                        foreach (KeyValuePair<String, String> textureSlots in skinCustomizer.SkinTextures)
+                        {
+                            SkinTexture newSkinTexture = new SkinTexture();
+                            newSkinTexture.SkinSlot = textureSlots.Key;
+                            newSkinTexture.Filename = textureSlots.Value;
+                            bMesh.SkinTextures.Add(newSkinTexture);
+                        }
+                        break;
                 }
             }
         }

@@ -37,6 +37,13 @@ namespace CCModPackGenerator
 
         public static BindingList<String> textureList;
 
+        public static BindingList<String> commonSkinList;
+        public static BindingList<String> commonTanList;
+        public static BindingList<String> honokaSkinList;
+        public static BindingList<String> honokaTanList;
+        public static BindingList<String> marieSkinList;
+        public static BindingList<String> marieTanList;
+
         public static BindingList<String> formatList;
 
         public ModPackGui()
@@ -61,6 +68,14 @@ namespace CCModPackGenerator
             legVBList = new BindingList<string>();
             textureList = new BindingList<string>();
             formatList = new BindingList<string>();
+
+            commonSkinList = new BindingList<string>();
+            commonTanList = new BindingList<string>();
+            marieSkinList = new BindingList<string>();
+            marieTanList = new BindingList<string>();
+            honokaSkinList = new BindingList<string>();
+            honokaTanList = new BindingList<string>();
+
             formatList.Add("DXGI_FORMAT_R16_UINT");
         }
 
@@ -100,6 +115,20 @@ namespace CCModPackGenerator
             legVBList.Add("");
             textureList.Clear();
             textureList.Add("");
+
+            commonSkinList.Clear();
+            commonSkinList.Add("");
+            commonTanList.Clear();
+            commonTanList.Add("");
+            marieSkinList.Clear();
+            marieSkinList.Add("");
+            marieTanList.Clear();
+            marieTanList.Add("");
+            honokaSkinList.Clear();
+            honokaSkinList.Add("");
+            honokaTanList.Clear();
+            honokaTanList.Add("");
+
             formatList.Clear();
             formatList.Add("");
             formatList.Add("DXGI_FORMAT_R16_UINT");
@@ -120,6 +149,31 @@ namespace CCModPackGenerator
                         }
                         foreach (BodyMesh bodyMesh in option.BodyMeshes)
                         {
+                            if (charProject.Model == ModelType.Honoka)
+                            {
+                                CacheString(bodyMesh.TanTexture, ref honokaTanList);
+                                foreach (SkinTexture aSkinTexture in bodyMesh.SkinTextures)
+                                {
+                                    CacheString(aSkinTexture.Filename, ref honokaSkinList);
+                                }
+                            }
+                            else if (charProject.Model == ModelType.MarieRose)
+                            {
+                                CacheString(bodyMesh.TanTexture, ref marieTanList);
+                                foreach (SkinTexture aSkinTexture in bodyMesh.SkinTextures)
+                                {
+                                    CacheString(aSkinTexture.Filename, ref marieSkinList);
+                                }
+                            }
+                            else
+                            {
+                                CacheString(bodyMesh.TanTexture, ref commonTanList);
+                                foreach (SkinTexture aSkinTexture in bodyMesh.SkinTextures)
+                                {
+                                    CacheString(aSkinTexture.Filename, ref commonSkinList);
+                                }
+                            }
+
                             switch (bodyMesh.MeshType)
                             {
                                 case BodyMeshType.Torso:
