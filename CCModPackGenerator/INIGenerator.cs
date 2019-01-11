@@ -240,11 +240,14 @@ namespace CCModPackGenerator
                                 CacheTextureResource(bodyMesh.TanTexture, option.Name + bodyMeshTypeResName[bodyMesh.MeshType] + tanSuffix);
                             }
 
-                            foreach (SkinTexture aSkinTexture in bodyMesh.SkinTextures)
+                            if (bodyMesh.SkinTextures != null)
                             {
-                                if (!String.IsNullOrEmpty(aSkinTexture.Filename))
+                                foreach (SkinTexture aSkinTexture in bodyMesh.SkinTextures)
                                 {
-                                    CacheTextureResource(aSkinTexture.Filename, option.Name + bodyMeshTypeResName[bodyMesh.MeshType] + aSkinTexture.SkinSlot + skinSuffix);
+                                    if (!String.IsNullOrEmpty(aSkinTexture.Filename))
+                                    {
+                                        CacheTextureResource(aSkinTexture.Filename, option.Name + bodyMeshTypeResName[bodyMesh.MeshType] + aSkinTexture.SkinSlot + skinSuffix);
+                                    }
                                 }
                             }
                         }
@@ -450,11 +453,14 @@ endif");
                                 sb.AppendLine(@"  Resource\" + resourceHeader + @"\" + bodyMeshTypeResName[bodyMesh.MeshType] + "PS3 = " + FilenameToResource[bodyMesh.TanTexture]);
                             }
 
-                            foreach (SkinTexture aSkinTexture in bodyMesh.SkinTextures)
+                            if (bodyMesh.SkinTextures != null)
                             {
-                                if (!String.IsNullOrEmpty(aSkinTexture.Filename) && FilenameToResource.ContainsKey(aSkinTexture.Filename))
+                                foreach (SkinTexture aSkinTexture in bodyMesh.SkinTextures)
                                 {
-                                    sb.AppendLine(@"  Resource\" + resourceHeader + @"\" + aSkinTexture.SkinSlot + bodyMeshTypeResName[bodyMesh.MeshType] + "PS0 = " + FilenameToResource[aSkinTexture.Filename]);
+                                    if (!String.IsNullOrEmpty(aSkinTexture.Filename) && FilenameToResource.ContainsKey(aSkinTexture.Filename))
+                                    {
+                                        sb.AppendLine(@"  Resource\" + resourceHeader + @"\" + aSkinTexture.SkinSlot + bodyMeshTypeResName[bodyMesh.MeshType] + "PS0 = " + FilenameToResource[aSkinTexture.Filename]);
+                                    }
                                 }
                             }
                         }
