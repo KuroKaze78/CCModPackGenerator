@@ -36,6 +36,7 @@ namespace CCModPackGenerator
         public static BindingList<String> legVBList;
 
         public static BindingList<String> textureList;
+        public static BindingList<String> constantBufferList;
 
         public static BindingList<String> commonSkinList;
         public static BindingList<String> commonTanList;
@@ -67,6 +68,7 @@ namespace CCModPackGenerator
             legIBList = new BindingList<string>();
             legVBList = new BindingList<string>();
             textureList = new BindingList<string>();
+            constantBufferList = new BindingList<String>();
             formatList = new BindingList<string>();
 
             commonSkinList = new BindingList<string>();
@@ -115,6 +117,8 @@ namespace CCModPackGenerator
             legVBList.Add("");
             textureList.Clear();
             textureList.Add("");
+            constantBufferList.Clear();
+            constantBufferList.Add("");
 
             commonSkinList.Clear();
             commonSkinList.Add("");
@@ -213,6 +217,7 @@ namespace CCModPackGenerator
                 CacheString(meshSlot.PS0Texture, ref textureList);
                 CacheString(meshSlot.PS1Texture, ref textureList);
                 CacheString(meshSlot.PS2Texture, ref textureList);
+                CacheString(meshSlot.PSCB2Buffer, ref constantBufferList);
             }
         }
 
@@ -376,6 +381,12 @@ namespace CCModPackGenerator
                 throw new Exception("Uncaught exception during export.", ex);
 #endif
             }
+        }
+
+        private void constantBufferEditorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConstantBuffer2Editor editor = new ConstantBuffer2Editor();
+            editor.Show();
         }
     }
 }

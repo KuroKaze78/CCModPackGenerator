@@ -717,6 +717,9 @@ namespace CCModPackGenerator
                         case MeshBuilder.MeshSlotParameter.PS2:
                             targetMeshSlot.PS2Texture = e.value;
                             break;
+                        case MeshBuilder.MeshSlotParameter.PSCB2:
+                            targetMeshSlot.PSCB2Buffer = e.value;
+                            break;
                     }
                 }
             }

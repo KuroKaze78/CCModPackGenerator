@@ -55,6 +55,7 @@ namespace CCModPackGenerator
                 this.tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 40.0f));
 
                 ResourceBuilder textureSlotResource = new ResourceBuilder();
+                textureSlotResource.FileFilter = "DDS (*.dds)|*.dds|PNG (*.png)|*.png";
                 textureSlotResource.Dock = DockStyle.Top;
                 if (modelType == CCModConfig.ModelType.Honoka)
                 {

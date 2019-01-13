@@ -37,7 +37,7 @@
             // resourceBuilderTan
             // 
             this.resourceBuilderTan.Dock = System.Windows.Forms.DockStyle.Top;
-            this.resourceBuilderTan.FileFilter = null;
+            this.resourceBuilderTan.FileFilter = "DDS (*.dds)|*.dds|PNG (*.png)|*.png";
             this.resourceBuilderTan.Location = new System.Drawing.Point(123, 3);
             this.resourceBuilderTan.Name = "resourceBuilderTan";
             this.resourceBuilderTan.ResourceUpdated = null;

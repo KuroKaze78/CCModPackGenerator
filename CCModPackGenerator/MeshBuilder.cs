@@ -46,7 +46,8 @@ namespace CCModPackGenerator
             SVB_STRIDE,
             PS0,
             PS1,
-            PS2
+            PS2,
+            PSCB2
         }
 
 
@@ -67,6 +68,7 @@ namespace CCModPackGenerator
             this.ps0Resource.ResourceUpdated = MeshSlotFilenameUpdated;
             this.ps1Resource.ResourceUpdated = MeshSlotFilenameUpdated;
             this.ps2Resource.ResourceUpdated = MeshSlotFilenameUpdated;
+            this.pscb2Resource.ResourceUpdated = MeshSlotFilenameUpdated;
             normalFormatValue = "";
             shadowFormatValue = "";
         }
@@ -98,6 +100,7 @@ namespace CCModPackGenerator
             this.ps0Resource.SetValue(meshSlot.PS0Texture);
             this.ps1Resource.SetValue(meshSlot.PS1Texture);
             this.ps2Resource.SetValue(meshSlot.PS2Texture);
+            this.pscb2Resource.SetValue(meshSlot.PSCB2Buffer);
 
             BindingSource bNFSource = new BindingSource();
             bNFSource.DataSource = ModPackGui.formatList;
@@ -116,6 +119,7 @@ namespace CCModPackGenerator
             this.ps0Resource.SetBindingList(ref ModPackGui.textureList);
             this.ps1Resource.SetBindingList(ref ModPackGui.textureList);
             this.ps2Resource.SetBindingList(ref ModPackGui.textureList);
+            this.pscb2Resource.SetBindingList(ref ModPackGui.constantBufferList);
         }
 
         public void SetNormalFormatText(String value)
@@ -195,6 +199,11 @@ namespace CCModPackGenerator
             {
                 updatedParam = MeshSlotParameter.PS2;
                 ModPackGui.CacheString(e.value, ref ModPackGui.textureList);
+            }
+            else if (sender == pscb2Resource)
+            {
+                updatedParam = MeshSlotParameter.PSCB2;
+                ModPackGui.CacheString(e.value, ref ModPackGui.constantBufferList);
             }
             if (sender is ResourceBuilder)
             {

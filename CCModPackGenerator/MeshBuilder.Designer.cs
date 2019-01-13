@@ -58,12 +58,14 @@
             this.normalStride = new System.Windows.Forms.TextBox();
             this.labelStride = new System.Windows.Forms.Label();
             this.labelFormat = new System.Windows.Forms.Label();
+            this.labelCB = new System.Windows.Forms.Label();
+            this.pscb2Resource = new CCModPackGenerator.ResourceBuilder();
             this.SuspendLayout();
             // 
             // enableShadows
             // 
             this.enableShadows.AutoSize = true;
-            this.enableShadows.Location = new System.Drawing.Point(105, 239);
+            this.enableShadows.Location = new System.Drawing.Point(105, 276);
             this.enableShadows.Name = "enableShadows";
             this.enableShadows.Size = new System.Drawing.Size(58, 17);
             this.enableShadows.TabIndex = 5;
@@ -75,7 +77,7 @@
             // disableShadows
             // 
             this.disableShadows.AutoSize = true;
-            this.disableShadows.Location = new System.Drawing.Point(196, 239);
+            this.disableShadows.Location = new System.Drawing.Point(196, 276);
             this.disableShadows.Name = "disableShadows";
             this.disableShadows.Size = new System.Drawing.Size(60, 17);
             this.disableShadows.TabIndex = 6;
@@ -87,7 +89,7 @@
             // customShadows
             // 
             this.customShadows.AutoSize = true;
-            this.customShadows.Location = new System.Drawing.Point(288, 239);
+            this.customShadows.Location = new System.Drawing.Point(288, 276);
             this.customShadows.Name = "customShadows";
             this.customShadows.Size = new System.Drawing.Size(60, 17);
             this.customShadows.TabIndex = 7;
@@ -143,7 +145,7 @@
             // 
             // labelShadowRadio
             // 
-            this.labelShadowRadio.Location = new System.Drawing.Point(8, 241);
+            this.labelShadowRadio.Location = new System.Drawing.Point(8, 278);
             this.labelShadowRadio.Name = "labelShadowRadio";
             this.labelShadowRadio.Size = new System.Drawing.Size(86, 13);
             this.labelShadowRadio.TabIndex = 16;
@@ -152,7 +154,7 @@
             // 
             // labelShadowIB
             // 
-            this.labelShadowIB.Location = new System.Drawing.Point(8, 271);
+            this.labelShadowIB.Location = new System.Drawing.Point(8, 308);
             this.labelShadowIB.Name = "labelShadowIB";
             this.labelShadowIB.Size = new System.Drawing.Size(86, 13);
             this.labelShadowIB.TabIndex = 17;
@@ -161,7 +163,7 @@
             // 
             // labelShadowVB
             // 
-            this.labelShadowVB.Location = new System.Drawing.Point(8, 335);
+            this.labelShadowVB.Location = new System.Drawing.Point(8, 372);
             this.labelShadowVB.Name = "labelShadowVB";
             this.labelShadowVB.Size = new System.Drawing.Size(86, 13);
             this.labelShadowVB.TabIndex = 18;
@@ -173,7 +175,7 @@
             this.svbResource.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.svbResource.FileFilter = "Vertex Buffer (*.vb)|*.vb";
-            this.svbResource.Location = new System.Drawing.Point(95, 328);
+            this.svbResource.Location = new System.Drawing.Point(95, 365);
             this.svbResource.Name = "svbResource";
             this.svbResource.ResourceUpdated = null;
             this.svbResource.Size = new System.Drawing.Size(280, 30);
@@ -184,7 +186,7 @@
             this.sibResource.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.sibResource.FileFilter = "Index Buffer (*.ib)|*.ib";
-            this.sibResource.Location = new System.Drawing.Point(95, 264);
+            this.sibResource.Location = new System.Drawing.Point(95, 301);
             this.sibResource.Name = "sibResource";
             this.sibResource.ResourceUpdated = null;
             this.sibResource.Size = new System.Drawing.Size(280, 30);
@@ -291,7 +293,7 @@
             // ShadowStride
             // 
             this.ShadowStride.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ShadowStride.Location = new System.Drawing.Point(325, 300);
+            this.ShadowStride.Location = new System.Drawing.Point(325, 337);
             this.ShadowStride.Name = "ShadowStride";
             this.ShadowStride.Size = new System.Drawing.Size(40, 20);
             this.ShadowStride.TabIndex = 22;
@@ -299,7 +301,7 @@
             // 
             // labelShadowFormat
             // 
-            this.labelShadowFormat.Location = new System.Drawing.Point(49, 303);
+            this.labelShadowFormat.Location = new System.Drawing.Point(49, 340);
             this.labelShadowFormat.Name = "labelShadowFormat";
             this.labelShadowFormat.Size = new System.Drawing.Size(45, 13);
             this.labelShadowFormat.TabIndex = 18;
@@ -314,7 +316,7 @@
             this.shadowFormat.Items.AddRange(new object[] {
             "",
             "DXGI_FORMAT_R16_UINT"});
-            this.shadowFormat.Location = new System.Drawing.Point(100, 300);
+            this.shadowFormat.Location = new System.Drawing.Point(100, 337);
             this.shadowFormat.Name = "shadowFormat";
             this.shadowFormat.Size = new System.Drawing.Size(173, 21);
             this.shadowFormat.TabIndex = 23;
@@ -323,7 +325,7 @@
             // labelShadowStride
             // 
             this.labelShadowStride.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelShadowStride.Location = new System.Drawing.Point(274, 303);
+            this.labelShadowStride.Location = new System.Drawing.Point(274, 340);
             this.labelShadowStride.Name = "labelShadowStride";
             this.labelShadowStride.Size = new System.Drawing.Size(45, 13);
             this.labelShadowStride.TabIndex = 18;
@@ -372,9 +374,31 @@
             this.labelFormat.Text = "Format:";
             this.labelFormat.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // labelCB
+            // 
+            this.labelCB.Location = new System.Drawing.Point(8, 246);
+            this.labelCB.Name = "labelCB";
+            this.labelCB.Size = new System.Drawing.Size(86, 13);
+            this.labelCB.TabIndex = 29;
+            this.labelCB.Text = "PS-CB2:";
+            this.labelCB.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // pscb2Resource
+            // 
+            this.pscb2Resource.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pscb2Resource.FileFilter = "Buffer (*.buf)|*.buf";
+            this.pscb2Resource.Location = new System.Drawing.Point(95, 239);
+            this.pscb2Resource.Name = "pscb2Resource";
+            this.pscb2Resource.ResourceUpdated = null;
+            this.pscb2Resource.Size = new System.Drawing.Size(280, 30);
+            this.pscb2Resource.TabIndex = 28;
+            // 
             // MeshBuilder
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
+            this.Controls.Add(this.labelCB);
+            this.Controls.Add(this.pscb2Resource);
             this.Controls.Add(this.normalFormat);
             this.Controls.Add(this.normalStride);
             this.Controls.Add(this.labelStride);
@@ -406,7 +430,7 @@
             this.Controls.Add(this.vbResource);
             this.Controls.Add(this.ibResource);
             this.Name = "MeshBuilder";
-            this.Size = new System.Drawing.Size(378, 367);
+            this.Size = new System.Drawing.Size(378, 400);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -444,5 +468,7 @@
         private System.Windows.Forms.TextBox normalStride;
         private System.Windows.Forms.Label labelStride;
         private System.Windows.Forms.Label labelFormat;
+        private System.Windows.Forms.Label labelCB;
+        private ResourceBuilder pscb2Resource;
     }
 }

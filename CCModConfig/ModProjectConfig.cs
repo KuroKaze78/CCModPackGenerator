@@ -227,6 +227,8 @@ namespace CCModConfig
         public String PS1Texture { get; set; }
         [XmlElement("PST2Texture")]
         public String PS2Texture { get; set; }
+        [XmlElement("PSCB2Buffer")]
+        public String PSCB2Buffer { get; set; }
 
         public MeshSlot()
         {
@@ -249,6 +251,7 @@ namespace CCModConfig
             cloneMeshSlot.PS0Texture = PS0Texture;
             cloneMeshSlot.PS1Texture = PS1Texture;
             cloneMeshSlot.PS2Texture = PS2Texture;
+            cloneMeshSlot.PSCB2Buffer = PSCB2Buffer;
 
             return cloneMeshSlot;
         }
@@ -290,6 +293,7 @@ namespace CCModConfig
         {
             MeshType = meshType;
             this.IsDefault = true;
+            SkinTextures = new List<SkinTexture>();
         }
 
         

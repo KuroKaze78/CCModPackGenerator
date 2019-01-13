@@ -49,6 +49,7 @@ namespace CCModPackGenerator
         private const String ps0Suffix = "_PS0";
         private const String ps1Suffix = "_PS1";
         private const String ps2Suffix = "_PS2";
+        private const String pscb2Suffix = "_PSCB2";
         private const String svbSuffix = "_SVB";
         private const String sibSuffix = "_SIB";
 
@@ -124,6 +125,13 @@ namespace CCModPackGenerator
             sb.AppendLine("format=" + format);
             sb.AppendLine("filename=" + filename);
 
+            CacheResource(false, filename, sb.ToString(), CorrectResourceName(name));
+        }
+        public void CacheConstantBufferResource(String filename, String name)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("type=Buffer");
+            sb.AppendLine("filename=" + filename);
             CacheResource(false, filename, sb.ToString(), CorrectResourceName(name));
         }
 
@@ -207,6 +215,10 @@ namespace CCModPackGenerator
                         CacheTextureResource(solidMesh.PS0Texture, option.Name + "S" + i + ps0Suffix);
                         CacheTextureResource(solidMesh.PS1Texture, option.Name + "S" + i + ps1Suffix);
                         CacheTextureResource(solidMesh.PS2Texture, option.Name + "S" + i + ps2Suffix);
+                        if (!String.IsNullOrEmpty(solidMesh.PSCB2Buffer))
+                        {
+                            CacheConstantBufferResource(solidMesh.PSCB2Buffer, option.Name + "S" + i + pscb2Suffix);
+                        }
                     }
 
                     i = 0;
@@ -226,6 +238,10 @@ namespace CCModPackGenerator
                         CacheTextureResource(alphaMesh.PS0Texture, option.Name + "A" + i + ps0Suffix);
                         CacheTextureResource(alphaMesh.PS1Texture, option.Name + "A" + i + ps1Suffix);
                         CacheTextureResource(alphaMesh.PS2Texture, option.Name + "A" + i + ps2Suffix);
+                        if (!String.IsNullOrEmpty(alphaMesh.PSCB2Buffer))
+                        {
+                            CacheConstantBufferResource(alphaMesh.PSCB2Buffer, option.Name + "A" + i + pscb2Suffix);
+                        }
                     }
 
                     foreach (BodyMesh bodyMesh in option.BodyMeshes)
@@ -267,110 +283,108 @@ namespace CCModPackGenerator
                 StringBuilder sb = new StringBuilder();
 
                 // Default Placeholder resources
-                sb.AppendLine(@"
-[ResourceIcon]
-[ResourcePreview]
-
-; Check options based on available
-[CommandListSelect]
-if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentCategory == 0
-  run = CommandListSelect0
-endif
-if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentCategory == 1
-  run = CommandListSelect1
-endif
-if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentCategory == 2
-  run = CommandListSelect2
-endif
-if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentCategory == 3
-  run = CommandListSelect3
-endif
-if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentCategory == 4
-  run = CommandListSelect4
-endif
-if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentCategory == 5
-  run = CommandListSelect5
-endif
-if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentCategory == 6
-  run = CommandListSelect6
-endif
-if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentCategory == 7
-  run = CommandListSelect7
-endif
-if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentCategory == 8
-  run = CommandListSelect8
-endif
-if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentCategory == 9
-  run = CommandListSelect9
-endif
-if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentCategory == 10
-  run = CommandListSelect10
-endif
-
-");
+                sb.AppendLine(@"[ResourceIcon]");
+                sb.AppendLine(@"[ResourcePreview]");
+                sb.AppendLine(@"");
+                sb.AppendLine(@"; Check options based on available");
+                sb.AppendLine(@"[CommandListSelect]");
+                sb.AppendLine(@"if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentCategory == 0");
+                sb.AppendLine(@"run = CommandListSelect0");
+                sb.AppendLine(@"endif");
+                sb.AppendLine(@"if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentCategory == 1");
+                sb.AppendLine(@"run = CommandListSelect1");
+                sb.AppendLine(@"endif");
+                sb.AppendLine(@"if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentCategory == 2");
+                sb.AppendLine(@"run = CommandListSelect2");
+                sb.AppendLine(@"endif");
+                sb.AppendLine(@"if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentCategory == 3");
+                sb.AppendLine(@"run = CommandListSelect3");
+                sb.AppendLine(@"endif");
+                sb.AppendLine(@"if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentCategory == 4");
+                sb.AppendLine(@"run = CommandListSelect4");
+                sb.AppendLine(@"endif");
+                sb.AppendLine(@"if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentCategory == 5");
+                sb.AppendLine(@"run = CommandListSelect5");
+                sb.AppendLine(@"endif");
+                sb.AppendLine(@"if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentCategory == 6");
+                sb.AppendLine(@"run = CommandListSelect6");
+                sb.AppendLine(@"endif");
+                sb.AppendLine(@"if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentCategory == 7");
+                sb.AppendLine(@"run = CommandListSelect7");
+                sb.AppendLine(@"endif");
+                sb.AppendLine(@"if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentCategory == 8");
+                sb.AppendLine(@"run = CommandListSelect8");
+                sb.AppendLine(@"endif");
+                sb.AppendLine(@"if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentCategory == 9");
+                sb.AppendLine(@"run = CommandListSelect9");
+                sb.AppendLine(@"endif");
+                sb.AppendLine(@"if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentCategory == 10");
+                sb.AppendLine(@"run = CommandListSelect10");
+                sb.AppendLine(@"endif");
+                sb.AppendLine(@"");
 
                 sb.AppendLine(@"[CommandListSelect0]");
-                sb.AppendLine(@"if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentOption == 12");
+                sb.AppendLine(@"if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentOption == 12");
                 sb.AppendLine(@"  ; Option 12");
 
                 // Set Preset 12
                 AppendPreset(charaProj, 12, sb);
 
-                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentOption == 11");
+                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentOption == 11");
                 sb.AppendLine(@"  ; Option 11");
 
                 // Set Preset 11
                 AppendPreset(charaProj, 11, sb);
 
-                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentOption == 10");
+                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentOption == 10");
                 sb.AppendLine(@"  ; Option 10");
 
                 // Set Preset 10
                 AppendPreset(charaProj, 10, sb);
 
-                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentOption == 9");
+                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentOption == 9");
                 sb.AppendLine(@"  ; Option 9");
 
                 // Set Preset 9
                 AppendPreset(charaProj, 9, sb);
 
-                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentOption == 8");
+                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentOption == 8");
                 sb.AppendLine(@"  ; Option 8");
 
                 // Set Preset 8
                 AppendPreset(charaProj, 8, sb);
 
-                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentOption == 7");
+                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentOption == 7");
                 sb.AppendLine(@"  ; Option 7");
 
                 // Set Preset 7
                 AppendPreset(charaProj, 7, sb);
 
-                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentOption == 6");
+                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentOption == 6");
                 sb.AppendLine(@"  ; Option 6");
 
                 // Set Preset 6
                 AppendPreset(charaProj, 6, sb);
 
-                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentOption == 5");
+                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentOption == 5");
                 sb.AppendLine(@"  ; Option 5");
 
                 // Set Preset 5
                 AppendPreset(charaProj, 5, sb);
 
-                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentOption == 4");
+                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentOption == 4");
                 sb.AppendLine(@"  ; Option 4");
 
                 // Set Preset 4
                 AppendPreset(charaProj, 4, sb);
 
-                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentOption == 3");
+                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentOption == 3");
                 sb.AppendLine(@"  ; Option 3");
 
                 // Set Preset 3
                 AppendPreset(charaProj, 3, sb);
 
-                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentOption == 2");
+                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentOption == 2");
                 sb.AppendLine(@"  ; Option 2");
 
                 // Set Preset 2
@@ -387,7 +401,7 @@ endif");
                 // Select Items
                 foreach (Item item in charaProj.Items)
                 {
-                    AppendItem(ModPath + referenceINI, item, sb);
+                    AppendItem(charaProj.Model, ModPath + referenceINI, item, sb);
                 }
 
                 // Resources
@@ -410,13 +424,13 @@ endif");
                 sb.AppendLine("; Preset " + slot + " - " + curPreset.Name);
                 foreach (PresetOption curPresetOption in curPreset.PresetOptions)
                 {
-                    sb.AppendLine(@"  $\Mods\Costumes\CostumeCustomizer\Common.ini\currentOption = " + curPresetOption.Option);
+                    sb.AppendLine(@"  $\Mods\Costumes\CostumeCustomizer\" + modelToIni[charaProj.Model] + @"\currentOption = " + curPresetOption.Option);
                     sb.AppendLine(@"  run = CommandListSelect" + categoryDefaults[curPresetOption.PresetItem].slot);
                 }
             }
         }
 
-        public void AppendItem(String resourceHeader, Item item, StringBuilder sb)
+        public void AppendItem(ModelType model, String resourceHeader, Item item, StringBuilder sb)
         {
             sb.AppendLine("; " + categoryDefaults[item.ItemCategory].header);
             sb.AppendLine("[CommandListSelect" + categoryDefaults[item.ItemCategory].slot + "]");
@@ -424,7 +438,7 @@ endif");
             for (int i = 1; i <= item.Options.Count; i++)
             {
                 Option currentOption = item.Options[i-1];
-                sb.AppendLine(@"if $\Mods\Costumes\CostumeCustomizer\Common.ini\currentOption == " + i);
+                sb.AppendLine(@"if $\Mods\Costumes\CostumeCustomizer\" + modelToIni[model] + @"\currentOption == " + i);
                 sb.AppendLine(@"  ; Option " + i + " - " + currentOption.Name);
                 
                 foreach (BodyMesh bodyMesh in currentOption.BodyMeshes)
@@ -526,6 +540,10 @@ endif");
                     {
                         sb.AppendLine(@"  Resource\" + resourceHeader + @"\" + categoryDefaults[item.ItemCategory].header + "S" + j + "PS2 = " + FilenameToResource[solidMesh.PS2Texture]);
                     }
+                    if (!String.IsNullOrEmpty(solidMesh.PSCB2Buffer))
+                    {
+                        sb.AppendLine(@"  Resource\" + resourceHeader + @"\" + categoryDefaults[item.ItemCategory].header + "S" + j + "PSCB2 = " + FilenameToResource[solidMesh.PSCB2Buffer]);
+                    }
                     sb.AppendLine();
                 }
 
@@ -588,6 +606,10 @@ endif");
                     if (!String.IsNullOrEmpty(alphaMesh.PS2Texture))
                     {
                         sb.AppendLine(@"  Resource\" + resourceHeader + @"\" + categoryDefaults[item.ItemCategory].header + "A" + j + "PS2 = " + FilenameToResource[alphaMesh.PS2Texture]);
+                    }
+                    if (!String.IsNullOrEmpty(alphaMesh.PSCB2Buffer))
+                    {
+                        sb.AppendLine(@"  Resource\" + resourceHeader + @"\" + categoryDefaults[item.ItemCategory].header + "A" + j + "PSCB2 = " + FilenameToResource[alphaMesh.PSCB2Buffer]);
                     }
                     sb.AppendLine();
                 }
