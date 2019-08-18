@@ -67,14 +67,14 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(525, 492);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(525, 638);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // SkinCustomizer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(525, 492);
+            this.ClientSize = new System.Drawing.Size(525, 638);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "SkinCustomizer";
             this.Text = "SkinCustomizer";

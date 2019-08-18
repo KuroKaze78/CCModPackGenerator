@@ -21,8 +21,11 @@ namespace CCModPackGenerator
 
         private ModelType currentModelType { get; set; }
 
+        bool isLoading;
+
         public ItemBuilder()
         {
+            isLoading = true;
             InitializeComponent();
             this.optionsBox.DisplayMember = "Name";
             //OptionList = new BindingList<Option>();
@@ -31,6 +34,7 @@ namespace CCModPackGenerator
             this.resourceSkinVB.ResourceUpdated = MeshSlotFilenameUpdated;
             this.resourceNailIB.ResourceUpdated = MeshSlotFilenameUpdated;
             this.resourceNailVB.ResourceUpdated = MeshSlotFilenameUpdated;
+            isLoading = false;
         }
 
         public void SetBindingList(BindingList<Option> optionList)
@@ -122,19 +126,19 @@ namespace CCModPackGenerator
             switch (ModItem.ItemCategory)
             {
                 case Category.Panty:
-                    newOpt.BodyMeshes.Add(new BodyMesh(BodyMeshType.Torso));
-                    newOpt.BodyMeshes.Add(new BodyMesh(BodyMeshType.Groin));
+                    EnsureBodyMesh(newOpt, BodyMeshType.Torso);
+                    EnsureBodyMesh(newOpt, BodyMeshType.Groin);
                     break;
                 case Category.Bra:
-                    newOpt.BodyMeshes.Add(new BodyMesh(BodyMeshType.Breast));
+                    EnsureBodyMesh(newOpt, BodyMeshType.Breast);
                     break;
                 case Category.Gloves:
-                    newOpt.BodyMeshes.Add(new BodyMesh(BodyMeshType.Arm));
-                    newOpt.BodyMeshes.Add(new BodyMesh(BodyMeshType.FingerNail));
+                    EnsureBodyMesh(newOpt, BodyMeshType.Arm);
+                    EnsureBodyMesh(newOpt, BodyMeshType.FingerNail);
                     break;
                 case Category.Shoes:
-                    newOpt.BodyMeshes.Add(new BodyMesh(BodyMeshType.Leg));
-                    newOpt.BodyMeshes.Add(new BodyMesh(BodyMeshType.ToeNail));
+                    EnsureBodyMesh(newOpt, BodyMeshType.Leg);
+                    EnsureBodyMesh(newOpt, BodyMeshType.ToeNail);
                     break;
             }
             newOpt.Name = "Option_" + (OptionList.Count + 1);
@@ -162,20 +166,46 @@ namespace CCModPackGenerator
 
         private void EnsureBodyMesh(Option currentOption, BodyMeshType requiredBodyMeshType)
         {
+            List<BodyMesh> existingBodyMeshes = new List<BodyMesh>();
+
             foreach (BodyMesh aBodyMesh in currentOption.BodyMeshes)
             {
                 if (aBodyMesh.MeshType == requiredBodyMeshType)
                 {
-                    return;
+                    existingBodyMeshes.Add(aBodyMesh);
                 }
             }
 
-            // option is missing an expected Body Mesh
-            currentOption.BodyMeshes.Add(new BodyMesh(requiredBodyMeshType));
+            if (existingBodyMeshes.Count == 0)
+            {
+                // option is missing an expected Body Mesh
+                currentOption.BodyMeshes.Add(new BodyMesh(requiredBodyMeshType));
+            }
+            else if (existingBodyMeshes.Count > 1)
+            {
+                // option is duplicated, remove all but one.
+                int keepIndex = 0;
+                for (int i = 0; i < existingBodyMeshes.Count; i++)
+                {
+                    if (!existingBodyMeshes[i].IsDefault && !existingBodyMeshes[i].IsNull)
+                    {
+                        keepIndex = i;
+                    }
+                }
+                for (int i=0; i < existingBodyMeshes.Count; i++)
+                {
+                    if (keepIndex != i)
+                    {
+                        currentOption.BodyMeshes.Remove(existingBodyMeshes[i]);
+                    }
+                }
+                MessageBox.Show("The Option " + currentOption.Name + " incorrectly included too many Body Mesh configurations and has been corrected to only include one per Body Mesh Type. Please verify that the resulting configuration is correct.");
+            }
         }
 
         private void UpdateDisplayForItem()
         {
+            this.isLoading = true;
             this.textBoxName.Text = "";
             this.buttonAddSolid.Enabled = false;
             this.buttonAddAlpha.Enabled = false;
@@ -401,6 +431,7 @@ namespace CCModPackGenerator
             {
                 this.selectionDefinitionSplits.Panel2.Enabled = false;
             }
+            this.isLoading = false;
         }
 
         private void textBoxIcon_Leave(object sender, EventArgs e)
@@ -737,6 +768,8 @@ namespace CCModPackGenerator
 
         private void radioButtonBodyDefault_CheckedChanged(object sender, EventArgs e)
         {
+            if (this.isLoading) return;
+
             Option selectedOption = this.optionsBox.SelectedItem as Option;
             if (selectedOption != null)
             {
@@ -760,10 +793,13 @@ namespace CCModPackGenerator
             this.resourceSkinIB.Enabled = false;
             this.resourceSkinVB.SetValue("");
             this.resourceSkinVB.Enabled = false;
+            this.bodySkinButton.Enabled = false;
         }
 
         private void radioButtonBodyOff_CheckedChanged(object sender, EventArgs e)
         {
+            if (this.isLoading) return;
+
             Option selectedOption = this.optionsBox.SelectedItem as Option;
             if (selectedOption != null)
             {
@@ -787,10 +823,13 @@ namespace CCModPackGenerator
             this.resourceSkinIB.Enabled = false;
             this.resourceSkinVB.SetValue("");
             this.resourceSkinVB.Enabled = false;
+            this.bodySkinButton.Enabled = false;
         }
 
         private void radioButtonBodyCustom_CheckedChanged(object sender, EventArgs e)
         {
+            if (this.isLoading) return;
+
             Option selectedOption = this.optionsBox.SelectedItem as Option;
             if (selectedOption != null)
             {
@@ -807,10 +846,13 @@ namespace CCModPackGenerator
             this.textBoxBodyStride.Enabled = true;
             this.resourceSkinIB.Enabled = true;
             this.resourceSkinVB.Enabled = true;
+            this.bodySkinButton.Enabled = true;
         }
 
         private void radioButtonNailDefault_CheckedChanged(object sender, EventArgs e)
         {
+            if (this.isLoading) return;
+
             Option selectedOption = this.optionsBox.SelectedItem as Option;
             if (selectedOption != null)
             {
@@ -834,10 +876,13 @@ namespace CCModPackGenerator
             this.resourceNailIB.Enabled = false;
             this.resourceNailVB.SetValue("");
             this.resourceNailVB.Enabled = false;
+            this.nailSkinButton.Enabled = false;
         }
 
         private void radioButtonNailOff_CheckedChanged(object sender, EventArgs e)
         {
+            if (this.isLoading) return;
+
             Option selectedOption = this.optionsBox.SelectedItem as Option;
             if (selectedOption != null)
             {
@@ -861,10 +906,13 @@ namespace CCModPackGenerator
             this.resourceNailIB.Enabled = false;
             this.resourceNailVB.SetValue("");
             this.resourceNailVB.Enabled = false;
+            this.nailSkinButton.Enabled = false;
         }
 
         private void radioButtonNailCustom_CheckedChanged(object sender, EventArgs e)
         {
+            if (this.isLoading) return;
+
             Option selectedOption = this.optionsBox.SelectedItem as Option;
             if (selectedOption != null)
             {
@@ -881,6 +929,7 @@ namespace CCModPackGenerator
             this.textBoxNailStride.Enabled = true;
             this.resourceNailIB.Enabled = true;
             this.resourceNailVB.Enabled = true;
+            this.nailSkinButton.Enabled = true;
         }
 
         private void comboBoxBodyFormat_Leave(object sender, EventArgs e)

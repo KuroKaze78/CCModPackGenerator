@@ -21,6 +21,23 @@ namespace CCModPackGenerator
             SkinTextures = new Dictionary<string, string>();
 
             TanTexture = bMesh.TanTexture;
+            resourceBuilderTan.SetValue(TanTexture);
+            resourceBuilderTan.ResourceUpdated = delegate (object sender, ResourceBuilder.StringEventArgs e)
+            {
+                TanTexture = e.value;
+                if (modelType == CCModConfig.ModelType.Honoka)
+                {
+                    ModPackGui.CacheString(e.value, ref ModPackGui.honokaTanList);
+                }
+                else if (modelType == CCModConfig.ModelType.MarieRose)
+                {
+                    ModPackGui.CacheString(e.value, ref ModPackGui.marieTanList);
+                }
+                else
+                {
+                    ModPackGui.CacheString(e.value, ref ModPackGui.commonTanList);
+                }
+            };
 
             StringCollection textureSlots = Properties.Settings.Default.CommonSkins;
             if (modelType == CCModConfig.ModelType.Honoka)

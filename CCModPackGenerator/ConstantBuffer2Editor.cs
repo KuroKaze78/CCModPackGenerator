@@ -87,9 +87,13 @@ namespace CCModPackGenerator
         private void SetGridValues(DataGridViewRow dRow, float[] values)
         {
             dRow.Cells[ColumnX.Index].Value = values[0];
+            dRow.Cells[ColumnX.Index].ToolTipText = System.BitConverter.ToString(System.BitConverter.GetBytes(values[0]));
             dRow.Cells[ColumnY.Index].Value = values[1];
+            dRow.Cells[ColumnY.Index].ToolTipText = System.BitConverter.ToString(System.BitConverter.GetBytes(values[1]));
             dRow.Cells[ColumnZ.Index].Value = values[2];
+            dRow.Cells[ColumnZ.Index].ToolTipText = System.BitConverter.ToString(System.BitConverter.GetBytes(values[2]));
             dRow.Cells[ColumnW.Index].Value = values[3];
+            dRow.Cells[ColumnW.Index].ToolTipText = System.BitConverter.ToString(System.BitConverter.GetBytes(values[3]));
         }
 
         private float[] GetGridValues(DataGridViewRow dRow)

@@ -15,6 +15,7 @@
   &lt;string&gt;Tamaki&lt;/string&gt;
   &lt;string&gt;LeiFang&lt;/string&gt;
   &lt;string&gt;Fiona&lt;/string&gt;
+  &lt;string&gt;Monica&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="HonokaSkins" Type="System.Collections.Specialized.StringCollection" Scope="Application">
@@ -29,6 +30,7 @@
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
   &lt;string&gt;MarieRose&lt;/string&gt;
   &lt;string&gt;Nagisa&lt;/string&gt;
+  &lt;string&gt;Kanna&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
   </Settings>

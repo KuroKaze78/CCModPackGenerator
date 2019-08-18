@@ -287,6 +287,7 @@ namespace CCModConfig
 
         public BodyMesh() : base()
         {
+            SkinTextures = new List<SkinTexture>();
         }
 
         public BodyMesh(BodyMeshType meshType) : this()
@@ -299,7 +300,7 @@ namespace CCModConfig
         
         public override Mesh Clone()
         {
-            BodyMesh cloneBodyMesh = new BodyMesh();
+            BodyMesh cloneBodyMesh = new BodyMesh(MeshType);
 
             cloneBodyMesh.IsNull = IsNull;
             cloneBodyMesh.IsDefault = IsDefault;
@@ -308,7 +309,11 @@ namespace CCModConfig
             cloneBodyMesh.VertexBuffer = VertexBuffer;
             cloneBodyMesh.Stride = Stride;
 
-            cloneBodyMesh.MeshType = MeshType;
+            cloneBodyMesh.TanTexture = TanTexture;
+            foreach (SkinTexture aSkinTexture in SkinTextures)
+            {
+                cloneBodyMesh.SkinTextures.Add(aSkinTexture.Clone());
+            }
 
             return cloneBodyMesh;
         }
@@ -321,6 +326,15 @@ namespace CCModConfig
 
         [XmlAttribute("Filename")]
         public String Filename { get; set; }
+
+        public SkinTexture Clone()
+        {
+            SkinTexture cloneSkinTexture = new SkinTexture();
+            cloneSkinTexture.SkinSlot = SkinSlot;
+            cloneSkinTexture.Filename = Filename;
+
+            return cloneSkinTexture;
+        }
     }
 
     public class Mesh
