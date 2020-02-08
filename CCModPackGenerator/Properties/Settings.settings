@@ -23,6 +23,7 @@
 &lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
   &lt;string&gt;Honoka&lt;/string&gt;
   &lt;string&gt;Luna&lt;/string&gt;
+  &lt;string&gt;Sayuri&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
     <Setting Name="MarieSkins" Type="System.Collections.Specialized.StringCollection" Scope="Application">

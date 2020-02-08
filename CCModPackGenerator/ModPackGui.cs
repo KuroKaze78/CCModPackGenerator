@@ -376,7 +376,7 @@ namespace CCModPackGenerator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Failed to export INI files.\nException: " + e.ToString(), "CC Mod Pack Generator", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Failed to export INI files.\nError: " + ex.Message + "\n\n\nException: " + ex.ToString(), "CC Mod Pack Generator", MessageBoxButtons.OK, MessageBoxIcon.Error);
 #if DEBUG
                 throw new Exception("Uncaught exception during export.", ex);
 #endif

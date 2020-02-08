@@ -204,17 +204,64 @@ namespace CCModPackGenerator
                         i++;
                         if (solidMesh.NormalMesh != null)
                         {
+                            if (String.IsNullOrEmpty(solidMesh.NormalMesh.IndexBuffer))
+                            {
+                                throw new Exception("Index Buffer (IB) must not be empty to properly export. Model Type: " + charaProj.Model + "; Category: " + item.ItemCategory + "; Option: " + option.Name + "; Mesh: Solid S" + i);
+                            }
+                            if (String.IsNullOrEmpty(solidMesh.NormalMesh.VertexBuffer))
+                            {
+                                throw new Exception("Vertex Buffer (VB) must not be empty to properly export. Model Type: " + charaProj.Model + "; Category: " + item.ItemCategory + "; Option: " + option.Name + "; Mesh: Solid S" + i);
+                            }
+                            if (String.IsNullOrEmpty(solidMesh.NormalMesh.Format))
+                            {
+                                throw new Exception("Format must not be empty to properly export. Model Type: " + charaProj.Model + "; Category: " + item.ItemCategory + "; Option: " + option.Name + "; Mesh: Solid S" + i);
+                            }
+                            if (solidMesh.NormalMesh.Stride == null || solidMesh.NormalMesh.Stride == 0)
+                            {
+                                throw new Exception("Stride must not be empty or 0 to properly export. Model Type: " + charaProj.Model + "; Category: " + item.ItemCategory + "; Option: " + option.Name + "; Mesh: Solid S" + i);
+                            }
+
                             CacheIBResource(solidMesh.NormalMesh.IndexBuffer, solidMesh.NormalMesh.Format, option.Name + "S" + i + ibSuffix);
                             CacheVBResource(solidMesh.NormalMesh.VertexBuffer, solidMesh.NormalMesh.Stride, option.Name + "S" + i + vbSuffix);
                         }
                         if (solidMesh.ShadowMesh != null && !solidMesh.ShadowMesh.IsNull && !solidMesh.ShadowMesh.IsDefault)
                         {
+                            if (String.IsNullOrEmpty(solidMesh.ShadowMesh.IndexBuffer))
+                            {
+                                throw new Exception("Shadow Index Buffer (IB) must not be empty to properly export. Model Type: " + charaProj.Model + "; Category: " + item.ItemCategory + "; Option: " + option.Name + "; Mesh: Solid S" + i);
+                            }
+                            if (String.IsNullOrEmpty(solidMesh.ShadowMesh.VertexBuffer))
+                            {
+                                throw new Exception("Shadow Vertex Buffer (VB) must not be empty to properly export. Model Type: " + charaProj.Model + "; Category: " + item.ItemCategory + "; Option: " + option.Name + "; Mesh: Solid S" + i);
+                            }
+                            if (String.IsNullOrEmpty(solidMesh.ShadowMesh.Format))
+                            {
+                                throw new Exception("Shadow Format must not be empty to properly export. Model Type: " + charaProj.Model + "; Category: " + item.ItemCategory + "; Option: " + option.Name + "; Mesh: Solid S" + i);
+                            }
+                            if (solidMesh.ShadowMesh.Stride == null || solidMesh.ShadowMesh.Stride == 0)
+                            {
+                                throw new Exception("Shadow Stride must not be empty or 0 to properly export. Model Type: " + charaProj.Model + "; Category: " + item.ItemCategory + "; Option: " + option.Name + "; Mesh: Solid S" + i);
+                            }
+
                             CacheIBResource(solidMesh.ShadowMesh.IndexBuffer, solidMesh.ShadowMesh.Format, option.Name + "S" + i + sibSuffix);
                             CacheVBResource(solidMesh.ShadowMesh.VertexBuffer, solidMesh.ShadowMesh.Stride, option.Name + "S" + i + svbSuffix);
                         }
-                        CacheTextureResource(solidMesh.PS0Texture, option.Name + "S" + i + ps0Suffix);
-                        CacheTextureResource(solidMesh.PS1Texture, option.Name + "S" + i + ps1Suffix);
-                        CacheTextureResource(solidMesh.PS2Texture, option.Name + "S" + i + ps2Suffix);
+                        if (!String.IsNullOrEmpty(solidMesh.PS0Texture))
+                        {
+                            CacheTextureResource(solidMesh.PS0Texture, option.Name + "S" + i + ps0Suffix);
+                        }
+                        else
+                        {
+                            throw new Exception("PS0 texture must not be empty to properly export. Model Type: " + charaProj.Model + "; Category: " + item.ItemCategory + "; Option: " + option.Name + "; Mesh: Solid S" + i);
+                        }
+                        if (!String.IsNullOrEmpty(solidMesh.PS1Texture))
+                        {
+                            CacheTextureResource(solidMesh.PS1Texture, option.Name + "S" + i + ps1Suffix);
+                        }
+                        if (!String.IsNullOrEmpty(solidMesh.PS2Texture))
+                        {
+                            CacheTextureResource(solidMesh.PS2Texture, option.Name + "S" + i + ps2Suffix);
+                        }
                         if (!String.IsNullOrEmpty(solidMesh.PSCB2Buffer))
                         {
                             CacheConstantBufferResource(solidMesh.PSCB2Buffer, option.Name + "S" + i + pscb2Suffix);
@@ -227,17 +274,63 @@ namespace CCModPackGenerator
                         i++;
                         if (alphaMesh.NormalMesh != null)
                         {
+                            if (String.IsNullOrEmpty(alphaMesh.NormalMesh.IndexBuffer))
+                            {
+                                throw new Exception("Index Buffer (IB) must not be empty to properly export. Model Type: " + charaProj.Model + "; Category: " + item.ItemCategory + "; Option: " + option.Name + "; Mesh: Alpha A" + i);
+                            }
+                            if (String.IsNullOrEmpty(alphaMesh.NormalMesh.VertexBuffer))
+                            {
+                                throw new Exception("Vertex Buffer (VB) must not be empty to properly export. Model Type: " + charaProj.Model + "; Category: " + item.ItemCategory + "; Option: " + option.Name + "; Mesh: Alpha A" + i);
+                            }
+                            if (String.IsNullOrEmpty(alphaMesh.NormalMesh.Format))
+                            {
+                                throw new Exception("Format must not be empty to properly export. Model Type: " + charaProj.Model + "; Category: " + item.ItemCategory + "; Option: " + option.Name + "; Mesh: Alpha A" + i);
+                            }
+                            if (alphaMesh.NormalMesh.Stride == null || alphaMesh.NormalMesh.Stride == 0)
+                            {
+                                throw new Exception("Stride must not be empty or 0 to properly export. Model Type: " + charaProj.Model + "; Category: " + item.ItemCategory + "; Option: " + option.Name + "; Mesh: Alpha A" + i);
+                            }
+
                             CacheIBResource(alphaMesh.NormalMesh.IndexBuffer, alphaMesh.NormalMesh.Format, option.Name + "A" + i + ibSuffix);
                             CacheVBResource(alphaMesh.NormalMesh.VertexBuffer, alphaMesh.NormalMesh.Stride, option.Name + "A" + i + vbSuffix);
                         }
                         if (alphaMesh.ShadowMesh != null && !alphaMesh.ShadowMesh.IsNull && !alphaMesh.ShadowMesh.IsDefault)
                         {
+                            if (String.IsNullOrEmpty(alphaMesh.ShadowMesh.IndexBuffer))
+                            {
+                                throw new Exception("Shadow Index Buffer (IB) must not be empty to properly export. Model Type: " + charaProj.Model + "; Category: " + item.ItemCategory + "; Option: " + option.Name + "; Mesh: Alpha A" + i);
+                            }
+                            if (String.IsNullOrEmpty(alphaMesh.ShadowMesh.VertexBuffer))
+                            {
+                                throw new Exception("Shadow Vertex Buffer (VB) must not be empty to properly export. Model Type: " + charaProj.Model + "; Category: " + item.ItemCategory + "; Option: " + option.Name + "; Mesh: Alpha A" + i);
+                            }
+                            if (String.IsNullOrEmpty(alphaMesh.ShadowMesh.Format))
+                            {
+                                throw new Exception("Shadow Format must not be empty to properly export. Model Type: " + charaProj.Model + "; Category: " + item.ItemCategory + "; Option: " + option.Name + "; Mesh: Alpha A" + i);
+                            }
+                            if (alphaMesh.ShadowMesh.Stride == null || alphaMesh.ShadowMesh.Stride == 0)
+                            {
+                                throw new Exception("Shadow Stride must not be empty or 0 to properly export. Model Type: " + charaProj.Model + "; Category: " + item.ItemCategory + "; Option: " + option.Name + "; Mesh: Alpha A" + i);
+                            }
                             CacheIBResource(alphaMesh.ShadowMesh.IndexBuffer, alphaMesh.ShadowMesh.Format, option.Name + "A" + i + ibSuffix);
                             CacheVBResource(alphaMesh.ShadowMesh.VertexBuffer, alphaMesh.ShadowMesh.Stride, option.Name + "A" + i + vbSuffix);
                         }
-                        CacheTextureResource(alphaMesh.PS0Texture, option.Name + "A" + i + ps0Suffix);
-                        CacheTextureResource(alphaMesh.PS1Texture, option.Name + "A" + i + ps1Suffix);
-                        CacheTextureResource(alphaMesh.PS2Texture, option.Name + "A" + i + ps2Suffix);
+                        if (!String.IsNullOrEmpty(alphaMesh.PS0Texture))
+                        {
+                            CacheTextureResource(alphaMesh.PS0Texture, option.Name + "A" + i + ps0Suffix);
+                        }
+                        else
+                        {
+                            throw new Exception("PS0 texture must not be empty to properly export. Model Type: " + charaProj.Model + "; Category: " + item.ItemCategory + "; Option: " + option.Name + "; Mesh: Alpha A" + i);
+                        }
+                        if (!String.IsNullOrEmpty(alphaMesh.PS1Texture))
+                        {
+                            CacheTextureResource(alphaMesh.PS1Texture, option.Name + "A" + i + ps1Suffix);
+                        }
+                        if (!String.IsNullOrEmpty(alphaMesh.PS2Texture))
+                        {
+                            CacheTextureResource(alphaMesh.PS2Texture, option.Name + "A" + i + ps2Suffix);
+                        }
                         if (!String.IsNullOrEmpty(alphaMesh.PSCB2Buffer))
                         {
                             CacheConstantBufferResource(alphaMesh.PSCB2Buffer, option.Name + "A" + i + pscb2Suffix);
@@ -248,6 +341,23 @@ namespace CCModPackGenerator
                     {
                         if (!bodyMesh.IsNull && !bodyMesh.IsDefault)
                         {
+                            if (String.IsNullOrEmpty(bodyMesh.IndexBuffer))
+                            {
+                                throw new Exception("Body Mesh Index Buffer (IB) must not be empty to properly export. Model Type: " + charaProj.Model + "; Category: " + item.ItemCategory + "; Option: " + option.Name + "; Body Mesh: " + bodyMesh.MeshType);
+                            }
+                            if (String.IsNullOrEmpty(bodyMesh.VertexBuffer))
+                            {
+                                throw new Exception("Body Mesh Vertex Buffer (VB) must not be empty to properly export. Model Type: " + charaProj.Model + "; Category: " + item.ItemCategory + "; Option: " + option.Name + "; Body Mesh: " + bodyMesh.MeshType);
+                            }
+                            if (String.IsNullOrEmpty(bodyMesh.Format))
+                            {
+                                throw new Exception("Body Mesh Format must not be empty to properly export. Model Type: " + charaProj.Model + "; Category: " + item.ItemCategory + "; Option: " + option.Name + "; Body Mesh: " + bodyMesh.MeshType);
+                            }
+                            if (bodyMesh.Stride == null || bodyMesh.Stride == 0)
+                            {
+                                throw new Exception("Body Mesh Stride must not be empty or 0 to properly export. Model Type: " + charaProj.Model + "; Category: " + item.ItemCategory + "; Option: " + option.Name + "; Body Mesh: " + bodyMesh.MeshType);
+                            }
+
                             CacheIBResource(bodyMesh.IndexBuffer, bodyMesh.Format, option.Name + bodyMeshTypeResName[bodyMesh.MeshType] + ibSuffix);
                             CacheVBResource(bodyMesh.VertexBuffer, bodyMesh.Stride, option.Name + bodyMeshTypeResName[bodyMesh.MeshType] + vbSuffix);
                             
