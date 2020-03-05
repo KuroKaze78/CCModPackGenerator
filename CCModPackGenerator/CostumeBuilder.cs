@@ -228,30 +228,22 @@ namespace CCModPackGenerator
 
             control.Items.Clear();
             control.Items.Add("None");
-            control.Items.Add("1");
-            control.Items.Add("2");
-            control.Items.Add("3");
-            control.Items.Add("4");
-            control.Items.Add("5");
-            control.Items.Add("6");
-            control.Items.Add("7");
-            control.Items.Add("8");
-            control.Items.Add("9");
-            control.Items.Add("10");
-            control.Items.Add("11");
-            control.Items.Add("12");
 
             for (int i = 0; i < optionList.Count; i++)
             {
                 int j = i + 1;
-                if (j < control.Items.Count)
-                {
-                    control.Items[j] = j + " - " + optionList[i].Name;
-                }
+                control.Items.Add(j + " - " + optionList[i].Name);
             }
 
+            if (selectedIndex < control.Items.Count)
+            {
+                control.SelectedIndex = selectedIndex;
+            }
+            else
+            {
+                control.SelectedIndex = 0;
+            }
             control.Refresh();
-            control.SelectedIndex = selectedIndex;
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)

@@ -399,115 +399,42 @@ namespace CCModPackGenerator
                 sb.AppendLine(@"; Check options based on available");
                 sb.AppendLine(@"[CommandListSelect]");
                 sb.AppendLine(@"if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentCategory == 0");
-                sb.AppendLine(@"run = CommandListSelect0");
-                sb.AppendLine(@"endif");
-                sb.AppendLine(@"if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentCategory == 1");
-                sb.AppendLine(@"run = CommandListSelect1");
-                sb.AppendLine(@"endif");
-                sb.AppendLine(@"if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentCategory == 2");
-                sb.AppendLine(@"run = CommandListSelect2");
-                sb.AppendLine(@"endif");
-                sb.AppendLine(@"if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentCategory == 3");
-                sb.AppendLine(@"run = CommandListSelect3");
-                sb.AppendLine(@"endif");
-                sb.AppendLine(@"if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentCategory == 4");
-                sb.AppendLine(@"run = CommandListSelect4");
-                sb.AppendLine(@"endif");
-                sb.AppendLine(@"if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentCategory == 5");
-                sb.AppendLine(@"run = CommandListSelect5");
-                sb.AppendLine(@"endif");
-                sb.AppendLine(@"if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentCategory == 6");
-                sb.AppendLine(@"run = CommandListSelect6");
-                sb.AppendLine(@"endif");
-                sb.AppendLine(@"if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentCategory == 7");
-                sb.AppendLine(@"run = CommandListSelect7");
-                sb.AppendLine(@"endif");
-                sb.AppendLine(@"if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentCategory == 8");
-                sb.AppendLine(@"run = CommandListSelect8");
-                sb.AppendLine(@"endif");
-                sb.AppendLine(@"if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentCategory == 9");
-                sb.AppendLine(@"run = CommandListSelect9");
-                sb.AppendLine(@"endif");
-                sb.AppendLine(@"if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentCategory == 10");
-                sb.AppendLine(@"run = CommandListSelect10");
+                sb.AppendLine(@"  run = CommandListSelect0");
+                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentCategory == 1");
+                sb.AppendLine(@"  run = CommandListSelect1");
+                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentCategory == 2");
+                sb.AppendLine(@"  run = CommandListSelect2");
+                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentCategory == 3");
+                sb.AppendLine(@"  run = CommandListSelect3");
+                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentCategory == 4");
+                sb.AppendLine(@"  run = CommandListSelect4");
+                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentCategory == 5");
+                sb.AppendLine(@"  run = CommandListSelect5");
+                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentCategory == 6");
+                sb.AppendLine(@"  run = CommandListSelect6");
+                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentCategory == 7");
+                sb.AppendLine(@"  run = CommandListSelect7");
+                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentCategory == 8");
+                sb.AppendLine(@"  run = CommandListSelect8");
+                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentCategory == 9");
+                sb.AppendLine(@"  run = CommandListSelect9");
+                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentCategory == 10");
+                sb.AppendLine(@"  run = CommandListSelect10");
                 sb.AppendLine(@"endif");
                 sb.AppendLine(@"");
 
                 sb.AppendLine(@"[CommandListSelect0]");
-                sb.AppendLine(@"if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentOption == 12");
-                sb.AppendLine(@"  ; Option 12");
 
-                // Set Preset 12
-                AppendPreset(charaProj, 12, sb);
 
-                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentOption == 11");
-                sb.AppendLine(@"  ; Option 11");
+                for (int i = 1; i <= charaProj.Presets.Count; i++)
+                {
+                    sb.AppendLine(@"");
+                    sb.AppendLine(@"if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentOption == " + i);
+                    sb.AppendLine(@"  ; Option " + i);
+                    AppendPreset(charaProj, i, sb);
+                    sb.AppendLine(@"endif");
+                }
 
-                // Set Preset 11
-                AppendPreset(charaProj, 11, sb);
-
-                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentOption == 10");
-                sb.AppendLine(@"  ; Option 10");
-
-                // Set Preset 10
-                AppendPreset(charaProj, 10, sb);
-
-                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentOption == 9");
-                sb.AppendLine(@"  ; Option 9");
-
-                // Set Preset 9
-                AppendPreset(charaProj, 9, sb);
-
-                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentOption == 8");
-                sb.AppendLine(@"  ; Option 8");
-
-                // Set Preset 8
-                AppendPreset(charaProj, 8, sb);
-
-                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentOption == 7");
-                sb.AppendLine(@"  ; Option 7");
-
-                // Set Preset 7
-                AppendPreset(charaProj, 7, sb);
-
-                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentOption == 6");
-                sb.AppendLine(@"  ; Option 6");
-
-                // Set Preset 6
-                AppendPreset(charaProj, 6, sb);
-
-                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentOption == 5");
-                sb.AppendLine(@"  ; Option 5");
-
-                // Set Preset 5
-                AppendPreset(charaProj, 5, sb);
-
-                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentOption == 4");
-                sb.AppendLine(@"  ; Option 4");
-
-                // Set Preset 4
-                AppendPreset(charaProj, 4, sb);
-
-                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentOption == 3");
-                sb.AppendLine(@"  ; Option 3");
-
-                // Set Preset 3
-                AppendPreset(charaProj, 3, sb);
-
-                sb.AppendLine(@"else if $\Mods\Costumes\CostumeCustomizer\" + referenceINI + @"\currentOption == 2");
-                sb.AppendLine(@"  ; Option 2");
-
-                // Set Preset 2
-                AppendPreset(charaProj, 2, sb);
-
-                sb.AppendLine("else");
-                sb.AppendLine("  ; Default");
-
-                // Default
-                AppendPreset(charaProj, 1, sb);
-
-                sb.AppendLine(@"
-endif");
                 // Select Items
                 foreach (Item item in charaProj.Items)
                 {
